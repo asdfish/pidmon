@@ -1,4 +1,4 @@
-sysmon
+pidmon
 *.o
 *.gch
 *.pch

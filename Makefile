@@ -25,9 +25,9 @@ define REMOVE_LIST
 		$(call REMOVE,${ITEM}))
 endef
 
-all: sysmon
+all: pidmon
 
-sysmon: ${PROCESSED_HEADER_FILES} ${OBJECT_FILES}
+pidmon: ${PROCESSED_HEADER_FILES} ${OBJECT_FILES}
 	$(info Linking $@)
 	@${CC} ${OBJECT_FILES} ${LD_FLAGS} -o $@
 
@@ -43,7 +43,7 @@ build/%.o: src/%.c
 	@${CC} -c $< ${C_FLAGS} -o $@
 
 clean:
-	$(call REMOVE,sysmon)
+	$(call REMOVE,pidmon)
 	$(call REMOVE_LIST,${OBJECT_FILES})
 
 .PHONY: all clean
