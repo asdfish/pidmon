@@ -1,5 +1,5 @@
-#ifndef PARSE_H
-#define PARSE_H
+#ifndef STAT_H
+#define STAT_H
 
 struct Stat {
   int pid;
@@ -56,6 +56,7 @@ struct Stat {
   int exit_code;
 };
 
+extern int generate_stat(struct Stat* output);
 extern int parse_pid_stat(int pid, struct Stat* output);
 
 #endif

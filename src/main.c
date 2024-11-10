@@ -1,8 +1,9 @@
-#include <utils.h>
+#include <stat.h>
 #include <stdio.h>
 
 int main(void) {
-  printf("%i", int_string_length(-69));
+  struct Stat st;
+  printf("%i", st.ppid);
 
   return 0;
 }
