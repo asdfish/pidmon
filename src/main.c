@@ -3,9 +3,9 @@
 
 int main(void) {
   struct Stat st;
-  generate_stat(&st);
+  stat_reset(&st);
 
-  int result = parse_pid_stat(1, &st);
+  int result = stat_set_from_pid(1, &st);
 
   printf("%s", st.tcomm);
 
