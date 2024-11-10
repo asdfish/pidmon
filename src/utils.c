@@ -1,4 +1,5 @@
 #include <utils.h>
+#include <stdlib.h>
 #include <string.h>
 
 static const char numbers[10] = {
@@ -47,4 +48,20 @@ bool string_is_int(const char* string) {
   return true;
 exit_failure:
   return false;
+}
+
+int string_to_int(const char* string, int* output) {
+  if(string == NULL || output == NULL)
+    goto exit_failure;
+
+  char* end_pointer = NULL;
+  int parsed_string = strtol(string, &end_pointer, 10);
+  if(end_pointer == string)
+    goto exit_failure;
+
+  *output = parsed_string;
+
+  return 0;
+exit_failure:
+  return -1;
 }
