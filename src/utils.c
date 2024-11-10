@@ -1,7 +1,8 @@
 #include <utils.h>
 
 unsigned int int_string_length(int input) {
-  unsigned int length = 0;
+  unsigned int length = 1;
+
   if(input < 0)
     length ++;
 
