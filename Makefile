@@ -8,6 +8,11 @@ LD_FLAGS := ${C_FLAGS}
 OBJECT_FILES := $(patsubst src/%.c,$\
 									build/%.o,$\
 									$(shell find src -name '*.c'))
+PROCESSED_HEADER_FILES := $(subst .h,$\
+														$(if $(findstring clang,${CC}),$\
+															.h.pch,$\
+															.h.gch),$\
+														$(shell find include -name '*.h'))
 
 define REMOVE
 	$(if $(wildcard $(1)),$\
@@ -22,9 +27,16 @@ endef
 
 all: sysmon
 
-sysmon: ${OBJECT_FILES}
+sysmon: ${PROCESSED_HEADER_FILES} ${OBJECT_FILES}
 	$(info Linking $@)
-	@${CC} $< ${LD_FLAGS} -o $@
+	@${CC} ${OBJECT_FILES} ${LD_FLAGS} -o $@
+
+%.h.gch: %.h
+	$(info Compiling $@)
+	@${CC} $< ${C_FLAGS} -o $@
+%.h.pch: %.h
+	$(info Compiling $@)
+	@${CC} $< ${C_FLAGS} -o $@
 
 build/%.o: src/%.c
 	$(info Compiling $@)
