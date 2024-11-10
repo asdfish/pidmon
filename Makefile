@@ -45,5 +45,6 @@ build/%.o: src/%.c
 clean:
 	$(call REMOVE,pidmon)
 	$(call REMOVE_LIST,${OBJECT_FILES})
+	$(call REMOVE_LIST,${PROCESSED_HEADER_FILES})
 
 .PHONY: all clean
