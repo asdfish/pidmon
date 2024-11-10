@@ -56,7 +56,9 @@ struct Stat {
   int exit_code;
 };
 
-extern int stat_set_from_pid(int pid, struct Stat* output);
-extern int stat_reset(struct Stat* output);
+int stat_set_from_pid(struct Stat* stat, int pid);
+extern int stat_reset(struct Stat* stat);
+extern int stats_set_from_pids(struct Stat* stats, unsigned int stats_length, int* pids, unsigned int pids_length);
+extern int stats_reset(struct Stat* stats, unsigned int stats_length);
 
 #endif

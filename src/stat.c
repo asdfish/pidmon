@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int stat_set_from_pid(int pid, struct Stat* output) {
-  if(output == NULL)
+int stat_set_from_pid(struct Stat* stat, int pid) {
+  if(stat == NULL)
     return -1;
 
   unsigned int stat_path_length = strlen("/proc//stat") + int_string_length(pid);
@@ -71,58 +71,58 @@ int stat_set_from_pid(int pid, struct Stat* output) {
     " %i"
     " %i"
     " %i",
-    &output->pid,
-    output->tcomm,
-    &output->state,
-    &output->ppid,
-    &output->pgrp,
-    &output->sid,
-    &output->tty_nr,
-    &output->tty_pgrp,
-    &output->flags,
-    &output->min_flt,
-    &output->cmin_flt,
-    &output->maj_flt,
-    &output->cmaj_flt,
-    &output->utime,
-    &output->stime,
-    &output->cutime,
-    &output->cstime,
-    &output->priority,
-    &output->nice,
-    &output->num_threads,
-    &output->it_real_value,
-    &output->start_time,
-    &output->vsize,
-    &output->rss,
-    &output->rsslim,
-    &output->start_code,
-    &output->end_code,
-    &output->start_stack,
-    &output->esp,
-    &output->eip,
-    &output->pending,
-    &output->blocked,
-    &output->sigign,
-    &output->sigcatch,
-    &output->unused_1,
-    &output->unused_2,
-    &output->unused_3,
-    &output->exit_signal,
-    &output->task_cpu,
-    &output->rt_priority,
-    &output->policy,
-    &output->blkio_ticks,
-    &output->gtime,
-    &output->cgtime,
-    &output->start_data,
-    &output->end_data,
-    &output->start_brk,
-    &output->arg_start,
-    &output->arg_end,
-    &output->env_start,
-    &output->env_end,
-    &output->exit_code
+    &stat->pid,
+    stat->tcomm,
+    &stat->state,
+    &stat->ppid,
+    &stat->pgrp,
+    &stat->sid,
+    &stat->tty_nr,
+    &stat->tty_pgrp,
+    &stat->flags,
+    &stat->min_flt,
+    &stat->cmin_flt,
+    &stat->maj_flt,
+    &stat->cmaj_flt,
+    &stat->utime,
+    &stat->stime,
+    &stat->cutime,
+    &stat->cstime,
+    &stat->priority,
+    &stat->nice,
+    &stat->num_threads,
+    &stat->it_real_value,
+    &stat->start_time,
+    &stat->vsize,
+    &stat->rss,
+    &stat->rsslim,
+    &stat->start_code,
+    &stat->end_code,
+    &stat->start_stack,
+    &stat->esp,
+    &stat->eip,
+    &stat->pending,
+    &stat->blocked,
+    &stat->sigign,
+    &stat->sigcatch,
+    &stat->unused_1,
+    &stat->unused_2,
+    &stat->unused_3,
+    &stat->exit_signal,
+    &stat->task_cpu,
+    &stat->rt_priority,
+    &stat->policy,
+    &stat->blkio_ticks,
+    &stat->gtime,
+    &stat->cgtime,
+    &stat->start_data,
+    &stat->end_data,
+    &stat->start_brk,
+    &stat->arg_start,
+    &stat->arg_end,
+    &stat->env_start,
+    &stat->env_end,
+    &stat->exit_code
   );
 
   if(scanned != 52)
@@ -137,61 +137,93 @@ exit_failure:
   return -1;
 }
 
-int stat_reset(struct Stat* output) {
-  if(output == NULL)
+int stat_reset(struct Stat* stat) {
+  if(stat == NULL)
     return -1;
 
-  output->pid = 0;
-  output->tcomm[0] = '\0';
-  output->state = '\0';
-  output->ppid = 0;
-  output->pgrp = 0;
-  output->sid = 0;
-  output->tty_nr = 0;
-  output->tty_pgrp = 0;
-  output->flags = 0;
-  output->min_flt = 0;
-  output->cmin_flt = 0;
-  output->maj_flt = 0;
-  output->cmaj_flt = 0;
-  output->utime = 0;
-  output->stime = 0;
-  output->cutime = 0;
-  output->cstime = 0;
-  output->priority = 0;
-  output->nice = 0;
-  output->num_threads = 0;
-  output->it_real_value = 0;
-  output->start_time = 0;
-  output->vsize = 0;
-  output->rss = 0;
-  output->rsslim = 0;
-  output->start_code = 0;
-  output->end_code = 0;
-  output->start_stack = 0;
-  output->esp = 0;
-  output->eip = 0;
-  output->pending = 0;
-  output->blocked = 0;
-  output->sigign = 0;
-  output->sigcatch = 0;
-  output->unused_1 = 0;
-  output->unused_2 = 0;
-  output->unused_3 = 0;
-  output->exit_signal = 0;
-  output->task_cpu = 0;
-  output->rt_priority = 0;
-  output->policy = 0;
-  output->blkio_ticks = 0;
-  output->gtime = 0;
-  output->cgtime = 0;
-  output->start_data = 0;
-  output->end_data = 0;
-  output->start_brk = 0;
-  output->arg_start = 0;
-  output->arg_end = 0;
-  output->env_start = 0;
-  output->env_end = 0;
-  output->exit_code = 0;
+  stat->pid = 0;
+  stat->tcomm[0] = '\0';
+  stat->state = '\0';
+  stat->ppid = 0;
+  stat->pgrp = 0;
+  stat->sid = 0;
+  stat->tty_nr = 0;
+  stat->tty_pgrp = 0;
+  stat->flags = 0;
+  stat->min_flt = 0;
+  stat->cmin_flt = 0;
+  stat->maj_flt = 0;
+  stat->cmaj_flt = 0;
+  stat->utime = 0;
+  stat->stime = 0;
+  stat->cutime = 0;
+  stat->cstime = 0;
+  stat->priority = 0;
+  stat->nice = 0;
+  stat->num_threads = 0;
+  stat->it_real_value = 0;
+  stat->start_time = 0;
+  stat->vsize = 0;
+  stat->rss = 0;
+  stat->rsslim = 0;
+  stat->start_code = 0;
+  stat->end_code = 0;
+  stat->start_stack = 0;
+  stat->esp = 0;
+  stat->eip = 0;
+  stat->pending = 0;
+  stat->blocked = 0;
+  stat->sigign = 0;
+  stat->sigcatch = 0;
+  stat->unused_1 = 0;
+  stat->unused_2 = 0;
+  stat->unused_3 = 0;
+  stat->exit_signal = 0;
+  stat->task_cpu = 0;
+  stat->rt_priority = 0;
+  stat->policy = 0;
+  stat->blkio_ticks = 0;
+  stat->gtime = 0;
+  stat->cgtime = 0;
+  stat->start_data = 0;
+  stat->end_data = 0;
+  stat->start_brk = 0;
+  stat->arg_start = 0;
+  stat->arg_end = 0;
+  stat->env_start = 0;
+  stat->env_end = 0;
+  stat->exit_code = 0;
   return 0;
+}
+
+int stats_set_from_pids(struct Stat* stats, unsigned int stats_length, int* pids, unsigned int pids_length) {
+  if(stats == NULL || pids == NULL)
+    goto exit_failure;
+  if(stats_length == 0 || pids_length == 0)
+    goto exit_success;
+
+  for(unsigned int i = 0; i < stats_length && i < pids_length; i ++)
+    if(stat_set_from_pid(stats + i, *(pids + i)) != 0)
+      goto exit_failure;
+
+exit_success:
+  return 0;
+exit_failure:
+  return -1;
+}
+
+int stats_reset(struct Stat* stats, unsigned int stats_length) {
+  if(stats == NULL)
+    goto exit_failure;
+  if(stats_length == 0)
+    goto exit_success;
+
+  for(unsigned int i = 0; i < stats_length; i ++)
+    if(stat_reset(stats + i) != 0)
+      goto exit_failure;
+
+exit_success:
+  return 0;
+exit_failure:
+  return -1;
 }
