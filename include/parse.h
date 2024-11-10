@@ -56,6 +56,6 @@ struct Stat {
   int exit_code;
 };
 
-int parse_pid_stat(int pid, struct Stat* output);
+extern int parse_pid_stat(int pid, struct Stat* output);
 
 #endif
