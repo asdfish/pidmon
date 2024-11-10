@@ -1,2 +1,4 @@
 sysmon
 *.o
+*.gch
+*.pch
