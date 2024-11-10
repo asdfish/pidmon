@@ -23,11 +23,11 @@ endef
 all: sysmon
 
 sysmon: ${OBJECT_FILES}
-	$(info Compiling $@)
+	$(info Linking $@)
 	@${CC} $< ${LD_FLAGS} -o $@
 
 build/%.o: src/%.c
-	$(info Linking $@)
+	$(info Compiling $@)
 	@${CC} -c $< ${C_FLAGS} -o $@
 
 clean:
