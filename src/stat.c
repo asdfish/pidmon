@@ -5,6 +5,65 @@
 #include <stdio.h>
 #include <string.h>
 
+int generate_stat(struct Stat* output) {
+  if(output == NULL)
+    return -1;
+
+  output->pid = 0;
+  output->tcomm[0] = '\0';
+  output->state = '\0';
+  output->ppid = 0;
+  output->pgrp = 0;
+  output->sid = 0;
+  output->tty_nr = 0;
+  output->tty_pgrp = 0;
+  output->flags = 0;
+  output->min_flt = 0;
+  output->cmin_flt = 0;
+  output->maj_flt = 0;
+  output->cmaj_flt = 0;
+  output->utime = 0;
+  output->stime = 0;
+  output->cutime = 0;
+  output->cstime = 0;
+  output->priority = 0;
+  output->nice = 0;
+  output->num_threads = 0;
+  output->it_real_value = 0;
+  output->start_time = 0;
+  output->vsize = 0;
+  output->rss = 0;
+  output->rsslim = 0;
+  output->start_code = 0;
+  output->end_code = 0;
+  output->start_stack = 0;
+  output->esp = 0;
+  output->eip = 0;
+  output->pending = 0;
+  output->blocked = 0;
+  output->sigign = 0;
+  output->sigcatch = 0;
+  output->unused_1 = 0;
+  output->unused_2 = 0;
+  output->unused_3 = 0;
+  output->exit_signal = 0;
+  output->task_cpu = 0;
+  output->rt_priority = 0;
+  output->policy = 0;
+  output->blkio_ticks = 0;
+  output->gtime = 0;
+  output->cgtime = 0;
+  output->start_data = 0;
+  output->end_data = 0;
+  output->start_brk = 0;
+  output->arg_start = 0;
+  output->arg_end = 0;
+  output->env_start = 0;
+  output->env_end = 0;
+  output->exit_code = 0;
+  return 0;
+}
+
 int parse_pid_stat(int pid, struct Stat* output) {
   if(output == NULL)
     return -1;
