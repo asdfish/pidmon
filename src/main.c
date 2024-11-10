@@ -1,13 +1,10 @@
-#include <stat.h>
+#include <utils.h>
 #include <stdio.h>
 
 int main(void) {
-  struct Stat st;
-  stat_reset(&st);
+  bool is_num = string_is_int("-59");
 
-  int result = stat_set_from_pid(1, &st);
-
-  printf("%s", st.tcomm);
+  printf("%i", is_num);
 
   return 0;
 }
